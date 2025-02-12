@@ -1,0 +1,381 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     14824,        373]
+NotebookOptionsPosition[     14423,        358]
+NotebookOutlinePosition[     14869,        375]
+CellTagsIndexPosition[     14826,        372]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"Clear", "[", "alp", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"prec", " ", "=", " ", "5"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"exportDataType", "=", "\"\<pdf\>\""}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", "Riemann", "  ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"name", " ", "=", " ", "\"\<HOZeroesRie\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"sinR", "[", "x_", "]"}], " ", "=", " ", 
+   RowBox[{
+    RowBox[{"x", "^", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"2", " ", "alp"}], " ", "-", "1"}], ")"}]}], 
+    RowBox[{"MittagLefflerE", "[", 
+     RowBox[{
+      RowBox[{"2", " ", "alp"}], ",", " ", 
+      RowBox[{"2", " ", "alp"}], ",", " ", 
+      RowBox[{"-", 
+       RowBox[{"x", "^", 
+        RowBox[{"(", 
+         RowBox[{"2", " ", "alp"}], ")"}]}]}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"cosR", "[", "x_", "]"}], " ", "=", " ", 
+   RowBox[{
+    RowBox[{"x", "^", 
+     RowBox[{"(", 
+      RowBox[{"alp", "-", "1"}], ")"}]}], 
+    RowBox[{"MittagLefflerE", "[", 
+     RowBox[{
+      RowBox[{"2", " ", "alp"}], ",", "  ", "alp", ",", " ", 
+      RowBox[{"-", 
+       RowBox[{"x", "^", 
+        RowBox[{"(", 
+         RowBox[{"2", " ", "alp"}], ")"}]}]}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"pcR", " ", "=", " ", 
+  RowBox[{"ContourPlot", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"cosR", "[", 
+      RowBox[{"x", " ", 
+       RowBox[{"Pi", "/", "2"}]}], "]"}], "==", "0"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"alp", ",", "0.51", ",", "1.5"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0.05", ",", "15"}], "}"}], ",", 
+    RowBox[{"ContourStyle", "->", 
+     RowBox[{"{", 
+      RowBox[{"Blue", ",", "Thick"}], "}"}]}], ",", 
+    RowBox[{"MaxRecursion", "->", "prec"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"psR", " ", "=", " ", 
+   RowBox[{"ContourPlot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"sinR", "[", 
+       RowBox[{"x", " ", 
+        RowBox[{"Pi", "/", "2"}]}], "]"}], "==", "0"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"alp", ",", "0.51", ",", "1.5"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0.05", ",", "15"}], "}"}], ",", 
+     RowBox[{"ContourStyle", "->", 
+      RowBox[{"{", 
+       RowBox[{"Blue", ",", "Dashed", ",", "Thick"}], "}"}]}], ",", 
+     RowBox[{"MaxRecursion", "->", "prec"}]}], "]"}]}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"final", " ", "output"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"fin", " ", "=", " ", 
+  RowBox[{"Show", "[", 
+   RowBox[{"{", 
+    RowBox[{"pcR", ",", "psR"}], "}"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+    RowBox[{"name", "<>", "\"\<.\>\"", "<>", "exportDataType"}], ",", "fin"}],
+    "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", "Caputo", "  ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"name", " ", "=", " ", "\"\<HOZeroesCap\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"sinC", "[", "x_", "]"}], " ", "=", " ", 
+   RowBox[{
+    RowBox[{"x", "^", 
+     RowBox[{"(", "a", ")"}]}], 
+    RowBox[{"MittagLefflerE", "[", 
+     RowBox[{
+      RowBox[{"2", " ", "alp"}], ",", " ", 
+      RowBox[{"1", "+", " ", "alp"}], ",", " ", 
+      RowBox[{"-", 
+       RowBox[{"x", "^", 
+        RowBox[{"(", 
+         RowBox[{"2", " ", "alp"}], ")"}]}]}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"cosC", "[", "x_", "]"}], " ", "=", " ", 
+   RowBox[{"MittagLefflerE", "[", 
+    RowBox[{
+     RowBox[{"2", " ", "alp"}], ",", " ", 
+     RowBox[{"-", 
+      RowBox[{"x", "^", 
+       RowBox[{"(", 
+        RowBox[{"2", " ", "alp"}], ")"}]}]}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"pcC", " ", "=", " ", 
+  RowBox[{"ContourPlot", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"cosC", "[", 
+      RowBox[{"x", " ", 
+       RowBox[{"Pi", "/", "2"}]}], "]"}], "==", "0"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"alp", ",", "0.51", ",", "1.5"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0.05", ",", "15"}], "}"}], ",", 
+    RowBox[{"ContourStyle", "->", 
+     RowBox[{"{", 
+      RowBox[{"Red", ",", "Thick"}], "}"}]}], ",", 
+    RowBox[{"MaxRecursion", "->", "prec"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"psC", " ", "=", " ", 
+   RowBox[{"ContourPlot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"sinC", "[", 
+       RowBox[{"x", " ", 
+        RowBox[{"Pi", "/", "2"}]}], "]"}], "==", "0"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"alp", ",", "0.51", ",", "1.5"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0.05", ",", "15"}], "}"}], ",", 
+     RowBox[{"ContourStyle", "->", 
+      RowBox[{"{", 
+       RowBox[{"Red", ",", "Dashed", ",", "Thick"}], "}"}]}], ",", 
+     RowBox[{"MaxRecursion", "->", "prec"}]}], "]"}]}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"final", " ", "output"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"fin", " ", "=", " ", 
+  RowBox[{"Show", "[", 
+   RowBox[{"{", 
+    RowBox[{"pcC", ",", "psC"}], "}"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+    RowBox[{"name", "<>", "\"\<.\>\"", "<>", "exportDataType"}], ",", "fin"}],
+    "]"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{"totalRC", " ", "=", " ", 
+   RowBox[{"Show", "[", 
+    RowBox[{"{", 
+     RowBox[{"pcR", ",", "psR", ",", "pcC", ",", "psC"}], "}"}], "]"}]}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", "Fourier", "  ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"name", " ", "=", " ", "\"\<HOZeroesFou\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"fp", " ", "=", "  ", 
+  RowBox[{"Exp", "[", 
+   RowBox[{
+    RowBox[{"+", "I"}], " ", 
+    RowBox[{"Pi", "/", 
+     RowBox[{"(", " ", 
+      RowBox[{"2", "alp"}], ")"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"fm", " ", "=", "  ", 
+  RowBox[{"Exp", "[", 
+   RowBox[{
+    RowBox[{"-", "I"}], " ", 
+    RowBox[{"Pi", "/", 
+     RowBox[{"(", " ", 
+      RowBox[{"2", "alp"}], ")"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"sinF", "[", "x_", "]"}], " ", "=", " ", 
+   RowBox[{
+    RowBox[{"1", "/", 
+     RowBox[{"(", 
+      RowBox[{"2", " ", "I"}], ")"}]}], 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"Exp", "[", 
+       RowBox[{"fp", " ", "x"}], "]"}], "-", " ", 
+      RowBox[{"Exp", "[", 
+       RowBox[{"fm", " ", "x"}], "]"}]}], ")"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"cosF", "[", "x_", "]"}], " ", "=", " ", 
+   RowBox[{
+    RowBox[{"1", "/", "2"}], 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"Exp", "[", 
+       RowBox[{"fp", " ", "x"}], "]"}], "+", " ", 
+      RowBox[{"Exp", "[", 
+       RowBox[{"fm", " ", "x"}], "]"}]}], ")"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"pcF", " ", "=", " ", 
+  RowBox[{"ContourPlot", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"cosF", "[", 
+      RowBox[{"x", " ", 
+       RowBox[{"Pi", "/", "2"}]}], "]"}], "==", "0"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"alp", ",", "0.51", ",", "1.5"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0.05", ",", "15"}], "}"}], ",", 
+    RowBox[{"ContourStyle", "->", 
+     RowBox[{"{", 
+      RowBox[{"Purple", ",", "Thick"}], "}"}]}], ",", 
+    RowBox[{"MaxRecursion", "->", "prec"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"psF", " ", "=", " ", 
+   RowBox[{"ContourPlot", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"sinF", "[", 
+       RowBox[{"x", " ", 
+        RowBox[{"Pi", "/", "2"}]}], "]"}], "==", "0"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"alp", ",", "0.51", ",", "1.5"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0.05", ",", "15"}], "}"}], ",", 
+     RowBox[{"ContourStyle", "->", 
+      RowBox[{"{", 
+       RowBox[{"Purple", ",", "Dashed", ",", "Thick"}], "}"}]}], ",", 
+     RowBox[{"MaxRecursion", "->", "prec"}]}], "]"}]}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"final", " ", "output"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"fin", " ", "=", " ", 
+  RowBox[{"Show", "[", 
+   RowBox[{"{", 
+    RowBox[{"pcF", ",", "psF"}], "}"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
+  RowBox[{
+   RowBox[{"name", "<>", "\"\<.\>\"", "<>", "exportDataType"}], ",", "fin"}], 
+  "]"}], "\n", 
+ RowBox[{
+  RowBox[{"totalRCF", " ", "=", " ", 
+   RowBox[{"Show", "[", 
+    RowBox[{"{", 
+     RowBox[{
+     "pcR", ",", "psR", ",", "pcC", ",", "psC", ",", "pcF", ",", "psF"}], 
+     "}"}], "]"}]}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"name", " ", "=", " ", "\"\<totalRCF\>\""}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
+  RowBox[{
+   RowBox[{"name", "<>", "\"\<.\>\"", "<>", "exportDataType"}], ",", "fin"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"alp", " ", "=", " ", "0.75"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Plot", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"cosR", "[", 
+       RowBox[{"x", " ", 
+        RowBox[{"Pi", "/", "2"}]}], "]"}], ",", " ", 
+      RowBox[{"cosC", "[", 
+       RowBox[{"x", " ", 
+        RowBox[{"Pi", "/", "2"}]}], "]"}], ",", 
+      RowBox[{"cosF", "[", 
+       RowBox[{"x", " ", 
+        RowBox[{"Pi", "/", "2"}]}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0", ",", "5"}], "}"}]}], "]"}], "\[IndentingNewLine]",
+   "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.9320239465572147`*^9, 3.9320239465572147`*^9}, 
+   3.9338412788900847`*^9, {3.933851920173294*^9, 3.9338520363066196`*^9}, {
+   3.9338521006583233`*^9, 3.933852130694566*^9}, {3.93385216461475*^9, 
+   3.93385230710647*^9}, {3.9338523540162215`*^9, 3.933852450934923*^9}, {
+   3.9338525154112234`*^9, 3.933852724179354*^9}, {3.9338527542751303`*^9, 
+   3.9338527556620936`*^9}, {3.933853408019412*^9, 3.933853504647258*^9}, {
+   3.933853557887789*^9, 3.9338535681838584`*^9}, {3.9338536333602343`*^9, 
+   3.933853635112444*^9}, {3.933853668866011*^9, 3.933853669630124*^9}, {
+   3.9338537038482676`*^9, 3.9338537107967687`*^9}, {3.9338537477661915`*^9, 
+   3.933853748245244*^9}, {3.9338537859402084`*^9, 3.933853786133548*^9}, {
+   3.9338538246429424`*^9, 3.933853848406389*^9}, {3.933853900639391*^9, 
+   3.933853901035389*^9}, {3.9338539518239994`*^9, 3.933853979650913*^9}, {
+   3.933854049215428*^9, 3.933854059505008*^9}, {3.9338540985579934`*^9, 
+   3.9338542641904707`*^9}, {3.933854295444592*^9, 3.933854374253852*^9}, {
+   3.9338545129522886`*^9, 3.9338545158202686`*^9}, {3.9338546023514004`*^9, 
+   3.933854708115857*^9}, {3.933854762012936*^9, 3.933854762476396*^9}, {
+   3.9338550269504185`*^9, 3.9338550284959884`*^9}, 3.93385526526937*^9, {
+   3.9338553706818027`*^9, 3.933855404845373*^9}, {3.9338561252122755`*^9, 
+   3.933856151455884*^9}, {3.9338566583060303`*^9, 3.9338568031116343`*^9}, {
+   3.9338568352396593`*^9, 3.933856902032571*^9}, {3.9338569401153483`*^9, 
+   3.9338569426288366`*^9}, {3.9338569877840486`*^9, 3.93385698858072*^9}, {
+   3.9339080136888494`*^9, 3.9339080295248413`*^9}, {3.9339081004775114`*^9, 
+   3.933908159643675*^9}, {3.9339081931705546`*^9, 3.933908342691737*^9}, {
+   3.933908399224223*^9, 3.933908429815452*^9}, {3.933908468335887*^9, 
+   3.9339085057112894`*^9}, {3.933908617244747*^9, 3.933908617742777*^9}, 
+   3.9339086553186913`*^9, {3.933908730143775*^9, 3.933908732939187*^9}, {
+   3.93390882116201*^9, 3.9339088452980995`*^9}, {3.9339088821862497`*^9, 
+   3.9339089733469834`*^9}, {3.9339090300492363`*^9, 
+   3.9339090308871765`*^9}, {3.9339091071868553`*^9, 
+   3.9339091075282297`*^9}, {3.9339091699588575`*^9, 
+   3.9339092782081394`*^9}, {3.9339093727324133`*^9, 
+   3.9339094403962736`*^9}, {3.9339095669488306`*^9, 3.933909567464057*^9}, {
+   3.933909630566527*^9, 3.93390971721735*^9}, 3.933909759321521*^9, {
+   3.9339100680879707`*^9, 3.933910083287526*^9}, {3.9339103543047023`*^9, 
+   3.9339103714374795`*^9}, {3.933910432579068*^9, 3.933910447453001*^9}, {
+   3.933910564123253*^9, 3.933910683160418*^9}, {3.9339107455434895`*^9, 
+   3.933910768136438*^9}, {3.9339108046918783`*^9, 3.9339108480355444`*^9}, {
+   3.9339119044796104`*^9, 3.9339119509088573`*^9}, {3.933912080791649*^9, 
+   3.9339120935024633`*^9}, {3.933912126287259*^9, 3.933912160321319*^9}, {
+   3.9339122029980745`*^9, 3.9339122395558443`*^9}, {3.933912283296566*^9, 
+   3.9339123401428895`*^9}, {3.9339124016312466`*^9, 3.933912405805538*^9}, {
+   3.933912445389784*^9, 3.933912477572551*^9}, 3.933917926707814*^9, {
+   3.9339182098272066`*^9, 3.9339182455992985`*^9}, {3.933918322995677*^9, 
+   3.9339185014948196`*^9}, {3.9339227398913484`*^9, 
+   3.9339227627518234`*^9}, {3.9339228194911575`*^9, 3.933922840845877*^9}, {
+   3.9339228709462824`*^9, 3.9339229582956057`*^9}, {3.933922999669099*^9, 
+   3.9339230907838726`*^9}, {3.933923154040249*^9, 3.933923191691947*^9}, {
+   3.9339232354821196`*^9, 3.9339232594001617`*^9}, {3.9339232972082815`*^9, 
+   3.9339234129914*^9}, {3.933923487638474*^9, 3.9339234975186987`*^9}, {
+   3.9339235337972536`*^9, 3.933923549462719*^9}, {3.933923589847872*^9, 
+   3.933923745326827*^9}, {3.933923793972608*^9, 3.933923926431254*^9}, {
+   3.9339240378764343`*^9, 3.933924169712366*^9}, {3.9339242093443775`*^9, 
+   3.933924303190402*^9}, {3.9339245350685987`*^9, 3.933924539180807*^9}, {
+   3.9339245834116125`*^9, 3.933924678747219*^9}, {3.9339247685079036`*^9, 
+   3.933924778016861*^9}, {3.9339248630666475`*^9, 3.9339248639731517`*^9}, {
+   3.933924918501644*^9, 3.9339249371812663`*^9}, {3.9339252371223984`*^9, 
+   3.9339252409065123`*^9}, {3.933925383392039*^9, 3.9339254215296183`*^9}, {
+   3.9339259604529457`*^9, 3.933925976299775*^9}, {3.933928059235533*^9, 
+   3.93392825010668*^9}},
+ CellLabel->
+  "In[534]:=",ExpressionUUID->"55b73f10-92e1-40a3-b554-fffd7d93fefd"]
+},
+WindowSize->{1314., 675.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+TaggingRules-><|"TryRealOnly" -> False|>,
+FrontEndVersion->"13.2 for Microsoft Windows (64-bit) (January 30, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"f0a303be-026c-4b0d-b801-0f0f7dd3d0f7"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 13861, 336, 866, "Input",ExpressionUUID->"55b73f10-92e1-40a3-b554-fffd7d93fefd"]
+}
+]
+*)
+
