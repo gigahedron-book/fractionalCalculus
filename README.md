@@ -1,13 +1,15 @@
-# fractionalCalculus
-Supplemental material for book: 
+Supplemental material for book:
 
 Fractional Calculus - An Introduction for physicists 4th edition
 
 Richard Herrmann
 
-World Scientific Publishing, Singapore  (2025) 872pp.
+World Scientific Publishing, Singapore (2025) 872pp.
 
 r.herrmann@gigahedron.fractionalcalculus.org
+
+
+
 
 
 Fractional calculus provides us with a set of axioms and methods to extend the concept of a derivative operator from integer order n to arbitrary order α, where α is a real or complex value.
