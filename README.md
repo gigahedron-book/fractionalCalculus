@@ -31,8 +31,6 @@ Doing computer physics in the fields of fractional calculus presents a wide rang
 We need methods to evaluate complex integrals, solve
 fractional extensions of ordinary or partial differential equations, manage intricate algebraic expressions, and importantly, generate graphical representations of derived results.
 
-Our primary goal is to raise awareness among scientists about the critical importance of sustainability and the responsible use of resources and energy. In scientific research and technology, we have become too accustomed to wasting hardware and resources. There is still much progress to be made in promoting practices like reusing components rather than prematurely discarding them.
-
 The examples we provide share a common goal: to prove that, instead of relying on simple library calls, minimal intelligence and creativity can lead to smart solutions for problems – not only within the framework of fractional calculus, but also for broader application areas – while carefully conserving resources.
 
 With that in mind, we hope you enjoy exploring the numerical challenges in fractional calculus.
