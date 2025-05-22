@@ -1,10 +1,10 @@
 Supplemental material for book:
 
-Fractional Calculus - An Introduction for physicists 4th edition
-
-Richard Herrmann
-
-World Scientific Publishing, Singapore (2025) 872pp.
+Richard  Herrmann, 
+Fractional Calculus - Introduction for Physicists,
+4th edition, 
+World Scientific Publishing, Singapore. 
+https://www.worldscientific.com/worldscibooks/10.1142/14345#t=aboutBook
 
 r.herrmann@gigahedron.fractionalcalculus.org
 

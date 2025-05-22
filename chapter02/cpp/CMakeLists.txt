@@ -18,7 +18,20 @@ set(INCLUDE_DIR "./include")
 # Compiler optimization flags
 add_compile_options(-Ofast -march=native -Wall -fopenmp)
 
-# Function to handle library installation
+# --- Check for Required Libraries ---
+
+# Ensure OpenBLAS and LAPACKE are installed
+find_package(BLAS REQUIRED)
+find_package(LAPACK REQUIRED)
+
+if(NOT BLAS_FOUND OR NOT LAPACK_FOUND)
+    message(FATAL_ERROR 
+        "OpenBLAS or LAPACKE library not found. Please install with:\n"
+        "sudo apt-get install libopenblas-dev liblapacke-dev"
+    )
+endif()
+
+# Function to install missing libraries
 function(install_library LIB_NAME LIB_VERSION LIB_URL LIB_INSTALL_DIR_VAR)
     set(DEFAULT_INSTALL_DIR "$ENV{HOME}/${LIB_NAME}_${LIB_VERSION}")
     set(${LIB_INSTALL_DIR_VAR} "${DEFAULT_INSTALL_DIR}" PARENT_SCOPE)
@@ -26,12 +39,10 @@ function(install_library LIB_NAME LIB_VERSION LIB_URL LIB_INSTALL_DIR_VAR)
     if(NOT EXISTS "${DEFAULT_INSTALL_DIR}")
         message(STATUS "${LIB_NAME} not found in ${DEFAULT_INSTALL_DIR}, downloading...")
 
-        # Create installation and download directories
         file(MAKE_DIRECTORY "${DEFAULT_INSTALL_DIR}")
         set(DOWNLOAD_DIR "${CMAKE_BINARY_DIR}/${LIB_NAME}_download")
         file(MAKE_DIRECTORY "${DOWNLOAD_DIR}")
 
-        # Download library if not already downloaded
         set(ARCHIVE_NAME "${LIB_NAME}-${LIB_VERSION}.tar.gz")
         set(ARCHIVE_PATH "${DOWNLOAD_DIR}/${ARCHIVE_NAME}")
         if(NOT EXISTS "${ARCHIVE_PATH}")
@@ -42,7 +53,6 @@ function(install_library LIB_NAME LIB_VERSION LIB_URL LIB_INSTALL_DIR_VAR)
             endif()
         endif()
 
-        # Extract archive
         execute_process(
             COMMAND tar -xzf "${ARCHIVE_PATH}" -C "${DEFAULT_INSTALL_DIR}" --strip-components=1
             RESULT_VARIABLE extract_result
@@ -55,11 +65,11 @@ function(install_library LIB_NAME LIB_VERSION LIB_URL LIB_INSTALL_DIR_VAR)
     endif()
 endfunction()
 
-# --- Library Installations ---
+# --- Library Installations --- 
 # Boost Configuration
 install_library(
-    "boost" "1.87.0"
-    "https://archives.boost.io/release/1.87.0/source/boost_1_87_0.tar.gz"
+    "boost" "1.88.0"
+    "https://archives.boost.io/release/1.88.0/source/boost_1_88_0.tar.gz"
     BOOST_INCLUDE_DIR
 )
 
@@ -71,26 +81,37 @@ install_library(
 )
 
 # Add library include paths
-include_directories(${INCLUDE_DIR} ${BOOST_INCLUDE_DIR} ${EIGEN_INCLUDE_DIR} )
+include_directories(${INCLUDE_DIR} ${BOOST_INCLUDE_DIR} ${EIGEN_INCLUDE_DIR})
 
 # --- Find and Link Libraries ---
-find_package(GSL REQUIRED)
-if(NOT GSL_FOUND)
-    message(FATAL_ERROR "GSL library not found. Install with: sudo apt-get install libgsl-dev")
+
+# GSL (Now Optional)
+find_package(GSL)
+if(GSL_FOUND)
+    message(STATUS "GSL library found: ${GSL_INCLUDE_DIRS}")
+    set(USE_GSL TRUE)
+else()
+    message(WARNING "GSL library not found. Some features will be disabled. Install with: sudo apt-get install gsl-bin libgsl0-dev")
+    set(USE_GSL FALSE)
 endif()
 
+# OpenMP (Required)
 find_package(OpenMP REQUIRED)
 if(NOT OpenMP_CXX_FOUND)
-    message(FATAL_ERROR "OpenMP library not found. Install with: sudo apt-get install libomp-dev")
+    message(FATAL_ERROR "OpenMP library not found. Ensure it's available in your compiler.")
 endif()
 
 # --- Source Files ---
-# List of source files
 set(SOURCES
-    unitTestInstallationML.cpp
+    ompGammaBoostD.cpp
+    ompGammaBoostL1024.cpp
+    ompGammaBoostL125.cpp
+    ompGammaBoostL1331.cpp
     ompGammaGslD.cpp
+    ompGammaLanD.cpp
     ompGammaLibD.cpp
     ompGammaLibF.cpp
+    ompGammaLibL.cpp
     ompGammaSerD.cpp
     ompGammaSerF.cpp
     ompGammaSerL27.cpp
@@ -100,30 +121,19 @@ set(SOURCES
 
 # Loop through the source files and create executables
 foreach(SOURCE_FILE ${SOURCES})
-    # Extract the filename without extension to use as target name
     get_filename_component(TARGET_NAME ${SOURCE_FILE} NAME_WE)
 
-    # Create an executable
     add_executable(${TARGET_NAME} ${SOURCE_FILE})
 
     # Link required libraries
-    target_link_libraries(${TARGET_NAME} OpenMP::OpenMP_CXX GSL::gsl GSL::gslcblas)
+    target_link_libraries(${TARGET_NAME} OpenMP::OpenMP_CXX BLAS::BLAS LAPACK::LAPACK)
+    
+    # Link GSL only if found
+    if(USE_GSL)
+        target_link_libraries(${TARGET_NAME} GSL::gsl GSL::gslcblas)
+    endif()
 
-    # Define installation rule for the executable
     install(TARGETS ${TARGET_NAME} DESTINATION ${INSTALL_PREFIX})
 endforeach()
 
-# --- GPL-2.0 License Information ---
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <https://www.gnu.org/licenses/>.
-
+message(STATUS "Configuration complete. Use 'make' to build the project.")
